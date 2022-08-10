@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, TextInput, StyleSheet, Pressable, ImageBackground, TouchableOpacity } from "react-native";
+import { View, Text, Button, TextInput, StyleSheet, Pressable, ImageBackground, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 
 // background image
 import BackgroundImage from '../assets/chatappbackground.png';
@@ -44,7 +44,7 @@ export default class Start extends React.Component {
                                 style={ styles.input }
                                 onChangeText={(name) => this.setState({ name })}
                                 value={this.state.name}
-                                placeholder="Name ..."
+                                placeholder="Your Name ..."
                             />
                         </View>
                     </View>
@@ -89,6 +89,11 @@ export default class Start extends React.Component {
                     <Text style={styles.buttonText}>Start Chatting</Text>                        
                 </Pressable>
                 </ImageBackground>
+
+                {/* /* fix error on display of keyboard for android devices  */}
+                {Platform.OS === "android" ? (
+                <KeyboardAvoidingView behavior="height" />
+                ) : null}
             </View>
         );
     }
@@ -133,13 +138,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#757083",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 30,
+        marginTop: 15,
+        marginBottom: 40,
     },
     container: {
         flex: 1,
     },
     inputMain: {
-        // backgroundColor: "#FFFFFF",
         height: "46%",
         width: "75%",
         justifyContent: "space-around",
@@ -165,8 +170,6 @@ const styles = StyleSheet.create({
         width:"100%",
     },
     colorBox: {
-        // marginRight: "auto",
-        // paddingLeft: 15,
         width: "75%",
         paddingBottom: 25,
     },
@@ -179,19 +182,18 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 20,
         borderColor: "grey",
-        // width: "75%",
         height: 40,
         paddingLeft: 20,
         paddingTop: 7,
         flexDirection: "row",
         alignItems: "center",
-        // opacity: .9,
     },
     colorArray: {
         flexDirection: "row",
         justifyContent: "space-between",
         width: "75%",
         paddingBottom: 25,
+        marginTop: 15,
     },
     color1: {
         backgroundColor: "#090C08",
