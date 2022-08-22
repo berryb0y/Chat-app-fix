@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, TextInput, StyleSheet, Pressable, ImageBackground, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { View, Text, Button, TextInput, StyleSheet, Pressable, ImageBackground, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 
 // background image
 import BackgroundImage from '../assets/chatappbackground.png';
