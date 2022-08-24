@@ -7,6 +7,8 @@ import { createStackNavigator} from '@react-navigation/stack';
 // importing views
 import Chat from './components/Chat';
 import Start from './components/Start';
+// import async storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
