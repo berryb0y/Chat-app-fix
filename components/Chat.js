@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { View, Text, Button, TextInput, StyleSheet, ImageBackground, Platform, KeyboardAvoidingView, FlatList, TouchableOpacityBase } from "react-native";
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 
-// import { initializeApp } from "firebase/app";
+// // import the necessary components from Expo
+// import MapView from 'react-native-maps';
 // import Firestore
 const firebase = require('firebase');
 require('firebase/firestore');
@@ -10,6 +11,8 @@ require('firebase/firestore');
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import netinfo package to find out if a user is online or not
 import NetInfo from '@react-native-community/netinfo';
+// import custom actions to add to GiftedChats
+import CustomActions from './CustomActions';
 
 
 export default class Chat extends React.Component {
@@ -45,7 +48,6 @@ export default class Chat extends React.Component {
         }
         //references the database
         this.referenceChatMessages = firebase.firestore().collection("messages");
-        // this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onCollectionUpdate)
         this.refMsgsUser = null;    
     };
 
@@ -229,6 +231,34 @@ export default class Chat extends React.Component {
         }
     }
 
+    renderCustomView (props) {
+      const { currentMessage} = props;
+      if (currentMessage.location) {
+        return (
+            <MapView
+              style={{
+                width: 150,
+                height: 100,
+                borderRadius: 13,
+                margin: 3
+              }}
+              region={{
+                latitude: currentMessage.location.latitude,
+                longitude: currentMessage.location.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+        );
+      }
+      return null;
+    }
+
+    // displays the communication features
+    renderCustomActions = (props) => {
+      return <CustomActions {...props} />;
+    };
+
     render() {
 
         // carries over bgcolor from start.js
@@ -244,7 +274,9 @@ export default class Chat extends React.Component {
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
                     messages={this.state.messages}
+                    renderActions={this.renderCustomActions}
                     onSend={(messages) => this.onSend(messages)}
+                    renderCustomView={this.renderCustomView}
                     user={{
                         _id: this.state.user._id,
                         name: this.state.name,
