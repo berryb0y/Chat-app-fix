@@ -21,16 +21,16 @@ location.
 
 ## Technical Requirements
 
-- App is written in React Native.
-- App is developed using Expo.
-- App is styled according to the given screen design.
+- Written in React Native.
+- Developed using Expo.
+- Wtyled according to the given screen design.
 - Chat conversations must be stored in Google Firestore Database.
-- App authenticates users anonymously via Google Firebase authentication.
+- Authenticates users anonymously via Google Firebase authentication.
 - Chat conversations must be stored locally.
-- App lets users pick and send images from the phone’s image library.
-- App lets users take pictures with the device’s camera app, and send them.
-- App can store images in Firebase Cloud Storage.
-- App can read the user’s location data.
+- Lets users pick and send images from the phone’s image library.
+- Lets users take pictures with the device’s camera app, and send them.
+- Stores images in Firebase Cloud Storage.
+- Read the user’s location data.
 - Location data must be sent via the chat in a map view.
 - The chat interface and functionality is created using the Gifted Chat library.
 - The app’s codebase must contain comments.
