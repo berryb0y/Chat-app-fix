@@ -10,8 +10,6 @@ import * as Location from "expo-location";
 // import Firestore
 const firebase = require('firebase');
 require('firebase/firestore');
-// import firebase storage (commented out because the app does not find it)
-/* import storage from '@react-native-firebase/storage'; */
 
 
 
