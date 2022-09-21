@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput, StyleSheet, ImageBackground, Platform, K
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 
 // // import the necessary components from Expo
-// import MapView from 'react-native-maps';
+import  MapView from 'react-native-maps';
 // import Firestore
 const firebase = require('firebase');
 require('firebase/firestore');

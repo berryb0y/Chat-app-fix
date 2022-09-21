@@ -35,23 +35,30 @@ export default class CustomActions extends React.Component {
         }
     };
 
+    /**
+     * allows users to take a picture,
+     * turning it into a blob, uploading it to Firebase Storage and then adding the image URL to the message object
+     */
     takePhoto = async () => {
-        const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY, Permissions.CAMERA);
-        try {
-            if(status === 'granted') {
-                let result = await ImagePicker.launchCameraAsync({
-                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                }).catch(error => console.log(error));
-            
-                if (!result.cancelled) {
-                    const imageUrl = await this.uploadImageFetch(result.uri);
-                    this.props.onSend({ image: imageUrl }); 
-                }
-            }
-        }catch (error) {
-            console.log(error.message);
-        }
-    };
+
+      // Ask user for permission to access photo library and camera
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
+      try {
+          // If permission is granted, let user take a picture
+          if (status === 'granted') {
+              let result = await ImagePicker.launchCameraAsync().catch(err => console.log(err));
+
+              // If the user doesn't cancel process, set image status to the image took by the user
+              if (!result.cancelled) {
+                  const blob = await this.createBlob(result.uri);
+                  const imageUrl = await this.uploadImageFetch(blob);
+                  this.props.onSend({ image: imageUrl });
+              }
+          }
+      } catch (err) {
+          console.log(err.message);
+      }
+  }
 
     getLocation = async () => {
         const { status } = await Permissions.askAsync(Permissions.LOCATION_FOREGROUND);
